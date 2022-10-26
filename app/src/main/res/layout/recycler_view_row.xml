@@ -5,11 +5,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp"
     android:weightSum="1"
-    android:background="@color/cardview_shadow_end_color">
+    android:background="#484f58">
 
     <androidx.cardview.widget.CardView
         android:layout_width="380dp"
-        android:layout_height="120dp"
+        android:layout_height="150dp"
+
         >
 
         <RelativeLayout
@@ -28,9 +29,10 @@
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="0dp"
                 android:layout_marginBottom="2dp"
-
                 android:text="ID"
-                app:icon="@drawable/ic_baseline_people_24" />
+                app:icon="@drawable/ic_baseline_people_24"
+
+                 />
 
             <TextView
                 android:id="@+id/NameTV"
@@ -57,7 +59,7 @@
                 android:text="TextView" />
 
             <TextView
-                android:id="@+id/ProblemTv"
+                android:id="@+id/TimestampTV"
                 android:layout_width="89dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/WorkTv"
@@ -67,6 +69,9 @@
                 android:layout_toStartOf="@+id/btnDelete"
                 android:layout_toEndOf="@+id/IdTv"
                 android:text="TextView" />
+
+
+
 
             <Button
                 android:id="@+id/btnDelete"
@@ -81,6 +86,21 @@
                 android:layout_marginBottom="34dp"
                 android:text="Delete"
                 app:icon="@drawable/ic_baseline_person_remove_24" />
+
+            <TextView
+                android:id="@+id/ProblemTv"
+                android:layout_width="89dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/TimestampTV"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="19dp"
+
+                android:layout_marginEnd="33dp"
+                android:layout_marginBottom="12dp"
+                android:layout_toStartOf="@+id/btnDelete"
+                android:layout_toEndOf="@+id/IdTv"
+                android:text="TextView" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 

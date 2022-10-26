@@ -14,7 +14,10 @@ import androidx.viewbinding.ViewBinding
 import com.example.spinnerrecycler.databinding.FragmentEntryBinding
 import com.example.spinnerrecycler.db.Entry
 import com.example.spinnerrecycler.db.SQLiteHelper
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter.RFC_1123_DATE_TIME
 import java.util.*
+import java.util.logging.SimpleFormatter
 
 class FragmentEntry:Fragment(R.layout.fragment_entry) {
     private var _binding: FragmentEntryBinding? = null
@@ -24,8 +27,12 @@ class FragmentEntry:Fragment(R.layout.fragment_entry) {
     private lateinit var sqLiteHelper: SQLiteHelper
     private lateinit var adapter: EntryAdapter
 
-    fun getCurrentDateTime(): Date {
-        return Calendar.getInstance().time
+    fun getCurrentDateTime(): String {
+        val time = Calendar.getInstance().time
+        val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm")
+        val current = formatter.format(time)
+        return current
+
     }
 
     override fun onCreateView(

@@ -47,6 +47,7 @@ class EntryAdapter : RecyclerView.Adapter<EntryAdapter.ViewHolder>() {
         private var name = view.findViewById<TextView>(R.id.NameTV)
         private var work = view.findViewById<TextView>(R.id.WorkTv)
         private var problems = view.findViewById<TextView>(R.id.ProblemTv)
+        private var timestamp = view.findViewById<TextView>(R.id.TimestampTV)
         var btnDelete = view.findViewById<Button>(R.id.btnDelete)
 
         fun bindView(entry: Entry){
@@ -54,6 +55,7 @@ class EntryAdapter : RecyclerView.Adapter<EntryAdapter.ViewHolder>() {
             name.text = entry.name
             work.text = entry.work
             problems.text = entry.problems
+            timestamp.text = entry.timestamp
 
         }
 
