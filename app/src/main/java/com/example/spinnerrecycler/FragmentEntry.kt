@@ -1,6 +1,7 @@
 package com.example.spinnerrecycler
 
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,16 +9,17 @@ import android.view.ViewGroup
 import android.view.ViewParent
 import android.widget.*
 import androidx.fragment.app.Fragment
-
-
 import androidx.viewbinding.ViewBinding
 import com.example.spinnerrecycler.databinding.FragmentEntryBinding
+import com.example.spinnerrecycler.databinding.FragmentShowBinding
 import com.example.spinnerrecycler.db.Entry
 import com.example.spinnerrecycler.db.SQLiteHelper
 import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter.RFC_1123_DATE_TIME
 import java.util.*
 import java.util.logging.SimpleFormatter
+
+
 
 class FragmentEntry:Fragment(R.layout.fragment_entry) {
     private var _binding: FragmentEntryBinding? = null
@@ -43,6 +45,7 @@ class FragmentEntry:Fragment(R.layout.fragment_entry) {
 
     ): View? {
         _binding = FragmentEntryBinding.inflate(inflater,container,false)
+
         val view = binding.root
         val Worker :Spinner = binding.spnWorker
         ArrayAdapter.createFromResource(requireActivity() as MainActivity,R.array.Worker,android.R.layout.simple_spinner_item)
@@ -60,7 +63,7 @@ class FragmentEntry:Fragment(R.layout.fragment_entry) {
 
 
 
-    }
+        }
         val Work:Spinner = binding.spnWorkList
         ArrayAdapter.createFromResource(requireActivity() as MainActivity,R.array.Worklist, android.R.layout.simple_spinner_item)
             .also { adapter -> adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -82,14 +85,17 @@ class FragmentEntry:Fragment(R.layout.fragment_entry) {
         }
 
         sqLiteHelper = SQLiteHelper(requireActivity() as MainActivity)
+
         return view
+
 
 }
     private fun addEntry() {
         val worker = WorkerSelected
         val work = WorkSelected
         val problems = binding.EditProblemsId.text.toString()
-        val instance = getCurrentDateTime().toString()
+        val instance = getCurrentDateTime()
+
 
         if (worker.isEmpty() || work.isEmpty()) {
             Toast.makeText(requireActivity() as MainActivity,"Παρακαλω Επιλεξτε Εργασια και Εργαζομενο", Toast.LENGTH_SHORT).show()
@@ -105,6 +111,22 @@ class FragmentEntry:Fragment(R.layout.fragment_entry) {
             }
         }
     }
+    fun isChecked(view: View) {
+        view as CheckBox
+        val checked :Boolean = view.isChecked
+
+        when(view.id) {
+            R.id.chbStart -> {
+                if (checked) binding.spnWorker.setBackgroundColor(Color.GRAY)
+                    this.binding.chbFinish.isChecked = false
+            }
+            R.id.chbFinish -> {
+                if (checked) binding.spnWorkList.setBackgroundColor(Color.DKGRAY)
+                    this.binding.chbStart.isChecked = false
+            }
+        }
+
+    }
 
     private fun getEntries() {
         val entrylist = sqLiteHelper.getEntry()
@@ -115,6 +137,8 @@ class FragmentEntry:Fragment(R.layout.fragment_entry) {
         super.onDestroyView()
         return
     }}
+
+
 
 
 

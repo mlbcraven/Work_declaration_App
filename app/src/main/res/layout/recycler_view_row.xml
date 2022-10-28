@@ -5,11 +5,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp"
     android:weightSum="1"
-    android:background="#484f58">
+    android:background="#484f58"
+    >
 
     <androidx.cardview.widget.CardView
         android:layout_width="380dp"
         android:layout_height="150dp"
+
 
         >
 

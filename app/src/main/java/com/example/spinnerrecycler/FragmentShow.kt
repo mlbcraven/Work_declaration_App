@@ -41,9 +41,8 @@ class FragmentShow: Fragment(R.layout.fragment_show) {
         getEntries()
         adapter?.onClickDeleteItem { deleteEntry(it.id) }
 
-
-
     }
+
     private fun deleteEntry(id : Int) {
         if (id == null) return
         val builder = AlertDialog.Builder(this.requireActivity())
