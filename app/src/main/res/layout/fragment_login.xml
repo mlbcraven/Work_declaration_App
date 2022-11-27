@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+      >
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:id="@+id/ed_worker"
+        android:inputType="text"
+        android:text="Enter Name"
+        />
+
+    <EditText
+        android:id="@+id/ed_password"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/ed_worker"
+        android:layout_marginTop="28dp"
+        android:layout_centerHorizontal="true"
+        android:inputType="numberPassword"
+        android:text="Enter Password"
+        />
+
+    <Button
+        android:id="@+id/btnClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ed_password"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="45dp"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        app:icon="@drawable/ic_baseline_clear_all_24"
+        android:layout_marginTop="72dp"
+        android:text="clear text" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ed_password"
+        android:layout_marginStart="65dp"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        app:icon="@drawable/ic_baseline_keyboard_24"
+        android:layout_marginTop="72dp"
+
+        android:layout_toEndOf="@+id/btnClear"
+        android:text="Login" />
+
+
+</RelativeLayout>

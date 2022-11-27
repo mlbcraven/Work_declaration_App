@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewParent
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.example.spinnerrecycler.databinding.FragmentEntryBinding
@@ -29,6 +30,7 @@ class FragmentEntry:Fragment(R.layout.fragment_entry) {
     private lateinit var sqLiteHelper: SQLiteHelper
     private lateinit var adapter: EntryAdapter
 
+
     fun getCurrentDateTime(): String {
         val time = Calendar.getInstance().time
         val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm")
@@ -45,6 +47,8 @@ class FragmentEntry:Fragment(R.layout.fragment_entry) {
 
     ): View? {
         _binding = FragmentEntryBinding.inflate(inflater,container,false)
+
+
 
         val view = binding.root
         val Worker :Spinner = binding.spnWorker
@@ -90,6 +94,12 @@ class FragmentEntry:Fragment(R.layout.fragment_entry) {
 
 
 }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar?.title = WorkerSelected
+    }
+
     private fun addEntry() {
         val worker = WorkerSelected
         val work = WorkSelected
@@ -132,6 +142,8 @@ class FragmentEntry:Fragment(R.layout.fragment_entry) {
         val entrylist = sqLiteHelper.getEntry()
         adapter?.addItems(entrylist)
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

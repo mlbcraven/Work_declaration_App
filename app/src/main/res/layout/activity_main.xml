@@ -10,7 +10,7 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView2"
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="590dp"
         />
 
     <Button
@@ -36,6 +36,9 @@
         android:layout_marginBottom="50dp"
         android:text="Αποτελεσματα"
         app:icon="@drawable/ic_baseline_view_list_24" />
+
+
+
 
 
 
