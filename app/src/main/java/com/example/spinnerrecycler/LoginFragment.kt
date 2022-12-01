@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.spinnerrecycler.databinding.FragmentLoginBinding
 
+@Suppress("DEPRECATION")
 class LoginFragment:Fragment(R.layout.fragment_login) {
     private lateinit var binding: FragmentLoginBinding
 
@@ -33,8 +34,12 @@ class LoginFragment:Fragment(R.layout.fragment_login) {
                 Toast.makeText(context,"Welcome Admin",Toast.LENGTH_SHORT).show()
 
             }
+             else if ((string == "pda3") && (int == 3 )) {
+                 Toast.makeText(context,"Welcome User 3", Toast.LENGTH_SHORT).show()
+
+            }
              else {
-                Toast.makeText(context,"Admin Hasn't lodged in",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,"User Hasn't lodged in",Toast.LENGTH_SHORT).show()
             }
         }
         fun fragmentNav(fragment: Fragment) {
@@ -45,14 +50,15 @@ class LoginFragment:Fragment(R.layout.fragment_login) {
         }
 
         loginbtn.setOnClickListener{
-            if ((loginName == null) && (loginpass == null)) {
+            if ((loginName.isEmpty()) || (loginpass.isEmpty())) {
                 Toast.makeText(context,"Please Add Credentials",Toast.LENGTH_SHORT).show()
 
             } else {
                 login(loginName.toString(),loginpass.toString().toInt())
+                fragmentNav(FragmentEntry())
             }
 
-            fragmentNav(FragmentEntry())
+
 
         }
 

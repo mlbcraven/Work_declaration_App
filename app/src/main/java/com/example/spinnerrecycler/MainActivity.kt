@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    private fun fragmentNav(fragment: Fragment) {
+      fun fragmentNav(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentContainerView2,fragment)

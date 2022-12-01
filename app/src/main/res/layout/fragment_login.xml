@@ -28,15 +28,15 @@
 
     <Button
         android:id="@+id/btnClear"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ed_password"
         android:layout_alignParentStart="true"
         android:layout_marginStart="45dp"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        app:icon="@drawable/ic_baseline_clear_all_24"
         android:layout_marginTop="72dp"
-        android:text="clear text" />
+        android:text="clear text"
+        app:icon="@drawable/ic_baseline_clear_all_24" />
 
     <Button
         android:id="@+id/btnLogin"
@@ -50,6 +50,19 @@
 
         android:layout_toEndOf="@+id/btnClear"
         android:text="Login" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:textSize="17dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="79dp"
+        android:text="Καλημερα σας - Καλη Διασκεδαση" />
 
 
 </RelativeLayout>
