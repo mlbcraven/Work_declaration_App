@@ -12,7 +12,7 @@
         android:layout_marginTop="150dp"
         android:id="@+id/ed_worker"
         android:inputType="text"
-        android:text="Enter Name"
+        android:text="Guest"
         />
 
     <EditText
@@ -23,7 +23,7 @@
         android:layout_marginTop="28dp"
         android:layout_centerHorizontal="true"
         android:inputType="numberPassword"
-        android:text="Enter Password"
+        android:text="1234"
         />
 
     <Button

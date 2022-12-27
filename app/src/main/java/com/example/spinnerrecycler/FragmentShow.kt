@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.MainThread
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spinnerrecycler.databinding.FragmentEntryBinding
+import com.example.spinnerrecycler.databinding.FragmentLoginBinding
 import com.example.spinnerrecycler.databinding.FragmentShowBinding
 import com.example.spinnerrecycler.db.Entry
 import com.example.spinnerrecycler.db.SQLiteHelper
@@ -26,7 +28,7 @@ class FragmentShow: Fragment(R.layout.fragment_show) {
         savedInstanceState: Bundle?
     ): View? {
 
-
+        (activity as AppCompatActivity).supportActionBar?.title = "Αποτελεσματα "
         _binding = FragmentShowBinding.inflate(inflater,container,false)
         return binding!!.root
     }

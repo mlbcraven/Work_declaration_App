@@ -2,8 +2,12 @@ package com.example.spinnerrecycler
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.findFragment
+import androidx.navigation.findNavController
 import com.example.spinnerrecycler.databinding.ActivityMainBinding
+import com.example.spinnerrecycler.databinding.FragmentLoginBinding
 import com.example.spinnerrecycler.db.SQLiteHelper
 
 class MainActivity : AppCompatActivity() {
@@ -31,8 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        val actionBar = supportActionBar
-        actionBar?.title = FragmentEntry().WorkerSelected
+
     }
 
 

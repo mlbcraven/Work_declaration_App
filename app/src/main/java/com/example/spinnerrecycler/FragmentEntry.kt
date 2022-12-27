@@ -90,6 +90,7 @@ class FragmentEntry:Fragment(R.layout.fragment_entry) {
 
         sqLiteHelper = SQLiteHelper(requireActivity() as MainActivity)
 
+
         return view
 
 
@@ -97,7 +98,7 @@ class FragmentEntry:Fragment(R.layout.fragment_entry) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.title = WorkerSelected
+        (activity as AppCompatActivity).supportActionBar?.title = "Επιλογη Εργασιας - Εργαζομενου"
     }
 
     private fun addEntry() {

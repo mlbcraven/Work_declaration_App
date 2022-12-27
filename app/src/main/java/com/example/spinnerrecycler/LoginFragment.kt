@@ -1,10 +1,12 @@
 package com.example.spinnerrecycler
 
+import android.app.ActionBar
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import android.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.example.spinnerrecycler.databinding.FragmentLoginBinding
 
@@ -33,12 +35,16 @@ class LoginFragment:Fragment(R.layout.fragment_login) {
             if ((string == "pda2") && (int == 2)){
                 Toast.makeText(context,"Welcome Admin",Toast.LENGTH_SHORT).show()
 
+
             }
-             else if ((string == "pda3") && (int == 3 )) {
+                else if ((string == "pda3") && (int == 3 )) {
                  Toast.makeText(context,"Welcome User 3", Toast.LENGTH_SHORT).show()
 
             }
-             else {
+                else if ((string == "Guest") && (int == 1234)) {
+                Toast.makeText(context,"Welcome Guest", Toast.LENGTH_SHORT).show()
+            }
+                else {
                 Toast.makeText(context,"User Hasn't lodged in",Toast.LENGTH_SHORT).show()
             }
         }
