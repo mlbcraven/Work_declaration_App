@@ -13,8 +13,8 @@ data class Entry (
     var work: String = "" ,
     var problems: String = "" ,
     var timestamp: String = "",
-    //var chbStart : Boolean ,
-    //var chbFinish : Boolean
+    var chbStart : Boolean = false,
+    var chbFinish : Boolean = false
 
  )
 {

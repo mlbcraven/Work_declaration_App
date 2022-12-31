@@ -13,7 +13,7 @@ class SQLiteHelper(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,nul
 
     companion object{
         val DATABASE_NAME:String = "entries.db"
-        val DATABASE_VERSION: Int = 2
+        val DATABASE_VERSION: Int = 3
 
         val TABLE_NAME: String = "entries"
         val KEY_ID: String = "id"
@@ -21,8 +21,8 @@ class SQLiteHelper(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,nul
         val KEY_NAME : String = "name"
         val KEY_WORK : String = "work"
         val KEY_TIMESTAMP : String = "timestamp"
-        //val KEY_CHBSTART : String = "chbStart"
-        //val KEY_CHBFINISH: String = "chbFinish"
+        val KEY_CHBSTART : String = "chbStart"
+        val KEY_CHBFINISH: String = "chbFinish"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -31,9 +31,9 @@ class SQLiteHelper(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,nul
                 KEY_NAME + " TEXT," +
                 KEY_WORK + " TEXT," +
                 KEY_TIMESTAMP + " TEXT," +
-                //KEY_CHBSTART + " TEXT," +
-                KEY_PROBLEMS + " TEXT "
-                //KEY_CHBFINISH + " TEXT "
+                KEY_CHBSTART + " TEXT," +
+                KEY_PROBLEMS + " TEXT, " +
+                KEY_CHBFINISH + " TEXT "
                  + ")")
         db?.execSQL(CREATE_TABLE)
     }
@@ -51,8 +51,8 @@ class SQLiteHelper(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,nul
         contentValues.put(KEY_WORK,entry.work)
         contentValues.put(KEY_PROBLEMS,entry.problems)
         contentValues.put(KEY_TIMESTAMP,entry.timestamp)
-        //contentValues.put(KEY_CHBSTART,entry.chbStart)
-        //contentValues.put(KEY_CHBFINISH,entry.chbFinish)
+        contentValues.put(KEY_CHBSTART,entry.chbStart)
+        contentValues.put(KEY_CHBFINISH,entry.chbFinish)
         val success = db.insert(TABLE_NAME , null, contentValues)
         db.close()
         return success
@@ -75,8 +75,8 @@ class SQLiteHelper(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,nul
         var work:String
         var timestamp : String
         var problems :String
-        var chbStart: CheckBox
-        var chbFinish : CheckBox
+        var chbStart: Boolean
+        var chbFinish : Boolean
 
         if (cursor.moveToFirst()) {
             do{
@@ -85,7 +85,9 @@ class SQLiteHelper(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,nul
                 work = cursor.getString(cursor.getColumnIndex("work"))
                 timestamp = cursor.getString(cursor.getColumnIndex("timestamp"))
                 problems = cursor.getString(cursor.getColumnIndex("problems"))
-                val ent = Entry(id = id, name = name , work = work, timestamp = timestamp, problems = problems)
+                chbStart = cursor.getString(cursor.getColumnIndex("chbStart")).toBoolean()
+                chbFinish = cursor.getString(cursor.getColumnIndex("chbFinish")).toBoolean()
+                val ent = Entry(id = id, name = name , work = work, timestamp = timestamp, problems = problems,chbStart = chbStart, chbFinish = chbFinish)
                 entryList.add(ent)
 
             }while (cursor.moveToNext())
@@ -100,8 +102,8 @@ class SQLiteHelper(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,nul
         contentValues.put(KEY_WORK,entry.work)
         contentValues.put(KEY_PROBLEMS,entry.problems)
         contentValues.put(KEY_TIMESTAMP,entry.timestamp)
-        //contentValues.put(KEY_CHBSTART,entry.chbStart)
-        //contentValues.put(KEY_CHBFINISH,entry.chbFinish)
+        contentValues.put(KEY_CHBSTART,entry.chbStart)
+        contentValues.put(KEY_CHBFINISH,entry.chbFinish)
         val success = db.update(TABLE_NAME, contentValues,"id=" + entry.id,null)
         db.close()
         return success

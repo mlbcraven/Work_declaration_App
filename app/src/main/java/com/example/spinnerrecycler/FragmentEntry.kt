@@ -6,11 +6,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewParent
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.example.spinnerrecycler.databinding.ActivityMainBinding
 import com.example.spinnerrecycler.databinding.FragmentEntryBinding
 import com.example.spinnerrecycler.databinding.FragmentShowBinding
 import com.example.spinnerrecycler.db.Entry
@@ -98,7 +97,7 @@ class FragmentEntry:Fragment(R.layout.fragment_entry) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.title = "Επιλογη Εργασιας - Εργαζομενου"
+
     }
 
     private fun addEntry() {
@@ -106,17 +105,24 @@ class FragmentEntry:Fragment(R.layout.fragment_entry) {
         val work = WorkSelected
         val problems = binding.EditProblemsId.text.toString()
         val instance = getCurrentDateTime()
+        val chbStart = binding.chbStart.toString().toBoolean()
+        val chbFinish = binding.chbFinish.toString().toBoolean()
 
 
         if (worker.isEmpty() || work.isEmpty()) {
             Toast.makeText(requireActivity() as MainActivity,"Παρακαλω Επιλεξτε Εργασια και Εργαζομενο", Toast.LENGTH_SHORT).show()
         }else {
-            val ent = Entry(name = worker, work = work, timestamp = instance, problems = problems)
+
+
+
+
+            val ent = Entry(name = worker, work = work, timestamp = instance, problems = problems, chbStart = chbStart, chbFinish = chbFinish )
             val status = sqLiteHelper.addEntry(ent)
 
             if (status > -1) {
                 Toast.makeText(requireActivity() as MainActivity, "Η καταχωρηση ηταν επιτυχης", Toast.LENGTH_SHORT).show()
                 binding.EditProblemsId.setText("")
+                
             }else{
                 Toast.makeText(requireActivity() as MainActivity, "Η καταχωρηση σας Δεν ηταν επιτυχης", Toast.LENGTH_SHORT).show()
             }
@@ -129,6 +135,7 @@ class FragmentEntry:Fragment(R.layout.fragment_entry) {
         when(view.id) {
             R.id.chbStart -> {
                 if (checked) binding.spnWorker.setBackgroundColor(Color.GRAY)
+
                     this.binding.chbFinish.isChecked = false
             }
             R.id.chbFinish -> {

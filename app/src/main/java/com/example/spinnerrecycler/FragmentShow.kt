@@ -28,7 +28,6 @@ class FragmentShow: Fragment(R.layout.fragment_show) {
         savedInstanceState: Bundle?
     ): View? {
 
-        (activity as AppCompatActivity).supportActionBar?.title = "Αποτελεσματα "
         _binding = FragmentShowBinding.inflate(inflater,container,false)
         return binding!!.root
     }

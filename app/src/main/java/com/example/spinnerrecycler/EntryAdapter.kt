@@ -5,6 +5,7 @@ import android.view.ScrollCaptureCallback
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spinnerrecycler.db.Entry
@@ -48,6 +49,7 @@ class EntryAdapter : RecyclerView.Adapter<EntryAdapter.ViewHolder>() {
         private var work = view.findViewById<TextView>(R.id.WorkTv)
         private var problems = view.findViewById<TextView>(R.id.ProblemTv)
         private var timestamp = view.findViewById<TextView>(R.id.TimestampTV)
+        var checkBox = view.findViewById<TextView>(R.id.checkBoxTV)
         var btnDelete = view.findViewById<Button>(R.id.btnDelete)
 
         fun bindView(entry: Entry){
@@ -56,6 +58,10 @@ class EntryAdapter : RecyclerView.Adapter<EntryAdapter.ViewHolder>() {
             work.text = entry.work
             problems.text = entry.problems
             timestamp.text = entry.timestamp
+            // Χρειαζεται αλλαγη η μεταβλητη
+            checkBox.text = entry.chbStart.toString()
+
+
 
         }
 

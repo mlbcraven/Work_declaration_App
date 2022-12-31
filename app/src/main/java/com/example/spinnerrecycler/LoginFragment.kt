@@ -7,12 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import android.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.spinnerrecycler.databinding.FragmentLoginBinding
 
 @Suppress("DEPRECATION")
 class LoginFragment:Fragment(R.layout.fragment_login) {
     private lateinit var binding: FragmentLoginBinding
+    private var loginUser = ""
 
 
     override fun onCreateView(
@@ -34,20 +36,25 @@ class LoginFragment:Fragment(R.layout.fragment_login) {
         fun login(string: String, int: Int ) {
             if ((string == "pda2") && (int == 2)){
                 Toast.makeText(context,"Welcome Admin",Toast.LENGTH_SHORT).show()
+                loginUser = "Admin"
 
 
             }
                 else if ((string == "pda3") && (int == 3 )) {
                  Toast.makeText(context,"Welcome User 3", Toast.LENGTH_SHORT).show()
+                loginUser = "User3"
+
 
             }
                 else if ((string == "Guest") && (int == 1234)) {
                 Toast.makeText(context,"Welcome Guest", Toast.LENGTH_SHORT).show()
+                loginUser = "Guest"
             }
                 else {
                 Toast.makeText(context,"User Hasn't lodged in",Toast.LENGTH_SHORT).show()
             }
         }
+
         fun fragmentNav(fragment: Fragment) {
 
             val fragmentTransaction = fragmentManager?.beginTransaction()
@@ -63,7 +70,7 @@ class LoginFragment:Fragment(R.layout.fragment_login) {
                 login(loginName.toString(),loginpass.toString().toInt())
                 fragmentNav(FragmentEntry())
             }
-
+            (activity as AppCompatActivity).supportActionBar?.title = loginUser
 
 
         }
