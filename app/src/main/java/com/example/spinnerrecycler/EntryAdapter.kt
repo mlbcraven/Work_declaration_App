@@ -8,12 +8,17 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.spinnerrecycler.MainActivity.Companion.onWork
+
 import com.example.spinnerrecycler.db.Entry
 
 class EntryAdapter : RecyclerView.Adapter<EntryAdapter.ViewHolder>() {
     private var entryList: ArrayList<Entry> = ArrayList()
     private var onClickItem: ((Entry) -> Unit)? = null
     private var onClickDeleteItem: ((Entry) -> Unit)? = null
+
+
+
 
     fun addItems(items: ArrayList<Entry>) {
         this.entryList = items
@@ -49,17 +54,21 @@ class EntryAdapter : RecyclerView.Adapter<EntryAdapter.ViewHolder>() {
         private var work = view.findViewById<TextView>(R.id.WorkTv)
         private var problems = view.findViewById<TextView>(R.id.ProblemTv)
         private var timestamp = view.findViewById<TextView>(R.id.TimestampTV)
-        var checkBox = view.findViewById<TextView>(R.id.checkBoxTV)
+        var workStatusTV = view.findViewById<TextView>(R.id.workStatusTV)
         var btnDelete = view.findViewById<Button>(R.id.btnDelete)
 
-        fun bindView(entry: Entry){
+
+        fun bindView(entry: Entry) {
+
+
             id.text = entry.id.toString()
             name.text = entry.name
             work.text = entry.work
             problems.text = entry.problems
             timestamp.text = entry.timestamp
-            // Χρειαζεται αλλαγη η μεταβλητη
-            checkBox.text = entry.chbStart.toString()
+            workStatusTV.text = entry.chbStart.toString()
+
+
 
 
 

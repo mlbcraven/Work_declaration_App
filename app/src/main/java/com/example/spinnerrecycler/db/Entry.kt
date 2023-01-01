@@ -1,6 +1,7 @@
 package com.example.spinnerrecycler.db
 
 import android.widget.CheckBox
+import android.widget.Switch
 import java.sql.Time
 import java.sql.Timestamp
 import java.util.*
@@ -13,8 +14,8 @@ data class Entry (
     var work: String = "" ,
     var problems: String = "" ,
     var timestamp: String = "",
-    var chbStart : Boolean = false,
-    var chbFinish : Boolean = false
+    var chbStart : Boolean
+
 
  )
 {

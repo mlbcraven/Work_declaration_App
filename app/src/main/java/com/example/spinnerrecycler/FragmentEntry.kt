@@ -9,6 +9,9 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.example.spinnerrecycler.MainActivity.Companion.loginUser
+import com.example.spinnerrecycler.MainActivity.Companion.onWork
+
 import com.example.spinnerrecycler.databinding.ActivityMainBinding
 import com.example.spinnerrecycler.databinding.FragmentEntryBinding
 import com.example.spinnerrecycler.databinding.FragmentShowBinding
@@ -24,10 +27,10 @@ import java.util.logging.SimpleFormatter
 class FragmentEntry:Fragment(R.layout.fragment_entry) {
     private var _binding: FragmentEntryBinding? = null
     private val binding get() = _binding!!
-    var WorkerSelected = ""
     var WorkSelected = ""
     private lateinit var sqLiteHelper: SQLiteHelper
     private lateinit var adapter: EntryAdapter
+
 
 
     fun getCurrentDateTime(): String {
@@ -47,26 +50,29 @@ class FragmentEntry:Fragment(R.layout.fragment_entry) {
     ): View? {
         _binding = FragmentEntryBinding.inflate(inflater,container,false)
 
+        //Switch
+             val switch = binding.switch1
+             val workStatus = binding.workStatus
+             workStatus.text = "$loginUser is Idle"
+
+             switch.setOnCheckedChangeListener { _, isChecked ->
+
+                 if (isChecked) {
+                     workStatus.text = "$loginUser is Currently Working On"
+                     onWork = true
+
+
+                 } else {
+                     onWork = false
+                     workStatus.text = "$loginUser is Idle"
+
+
+                 }
+             }
 
 
         val view = binding.root
-        val Worker :Spinner = binding.spnWorker
-        ArrayAdapter.createFromResource(requireActivity() as MainActivity,R.array.Worker,android.R.layout.simple_spinner_item)
-            .also { adapter -> adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                Worker.adapter = adapter}
-        Worker.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(adapteView: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                WorkerSelected = adapteView?.getItemAtPosition(position).toString()
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
-
-
-
-
-        }
+     //Work Spinner
         val Work:Spinner = binding.spnWorkList
         ArrayAdapter.createFromResource(requireActivity() as MainActivity,R.array.Worklist, android.R.layout.simple_spinner_item)
             .also { adapter -> adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -74,6 +80,17 @@ class FragmentEntry:Fragment(R.layout.fragment_entry) {
         Work.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(adapteView: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 WorkSelected = adapteView?.getItemAtPosition(position).toString()
+                val image = binding.imageView
+                if (WorkSelected == "Picking") {
+
+                    image.setImageResource(R.drawable.ic_baseline_picking)
+                }else if (WorkSelected == "Ετικετοκολληση") {
+                    image.setImageResource(R.drawable.ic_baseline_auto_awesome_motion_24)
+                }else if ((WorkSelected == "Εμφιαλωση") || (WorkSelected == "Προετοιμασια")) {
+                    image.setImageResource(R.drawable.ic_baseline_update_24)
+                }else{
+                    image.setImageResource(R.drawable.ic_baseline_assignment_24)
+                }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -81,6 +98,7 @@ class FragmentEntry:Fragment(R.layout.fragment_entry) {
             }
 
         }
+
 
         val entrybtn = binding.btnEntry
         entrybtn.setOnClickListener {
@@ -101,12 +119,12 @@ class FragmentEntry:Fragment(R.layout.fragment_entry) {
     }
 
     private fun addEntry() {
-        val worker = WorkerSelected
+        val worker = loginUser
         val work = WorkSelected
         val problems = binding.EditProblemsId.text.toString()
         val instance = getCurrentDateTime()
-        val chbStart = binding.chbStart.toString().toBoolean()
-        val chbFinish = binding.chbFinish.toString().toBoolean()
+        val chbStart = onWork
+
 
 
         if (worker.isEmpty() || work.isEmpty()) {
@@ -116,7 +134,7 @@ class FragmentEntry:Fragment(R.layout.fragment_entry) {
 
 
 
-            val ent = Entry(name = worker, work = work, timestamp = instance, problems = problems, chbStart = chbStart, chbFinish = chbFinish )
+            val ent = Entry(name = worker, work = work, timestamp = instance, problems = problems, chbStart = chbStart )
             val status = sqLiteHelper.addEntry(ent)
 
             if (status > -1) {
@@ -128,13 +146,13 @@ class FragmentEntry:Fragment(R.layout.fragment_entry) {
             }
         }
     }
-    fun isChecked(view: View) {
+    /*fun isChecked(view: View) {
         view as CheckBox
         val checked :Boolean = view.isChecked
 
         when(view.id) {
             R.id.chbStart -> {
-                if (checked) binding.spnWorker.setBackgroundColor(Color.GRAY)
+                if (checked) binding.spnWorkList.setBackgroundColor(Color.GRAY)
 
                     this.binding.chbFinish.isChecked = false
             }
@@ -144,11 +162,11 @@ class FragmentEntry:Fragment(R.layout.fragment_entry) {
             }
         }
 
-    }
+    }*/
 
     private fun getEntries() {
         val entrylist = sqLiteHelper.getEntry()
-        adapter?.addItems(entrylist)
+        adapter.addItems(entrylist)
     }
 
 

@@ -15,6 +15,7 @@ import com.example.spinnerrecycler.databinding.FragmentLoginBinding
 import com.example.spinnerrecycler.databinding.FragmentShowBinding
 import com.example.spinnerrecycler.db.Entry
 import com.example.spinnerrecycler.db.SQLiteHelper
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class FragmentShow: Fragment(R.layout.fragment_show) {
     private var _binding: FragmentShowBinding? = null
@@ -29,7 +30,42 @@ class FragmentShow: Fragment(R.layout.fragment_show) {
     ): View? {
 
         _binding = FragmentShowBinding.inflate(inflater,container,false)
-        return binding!!.root
+        val btnDeleteAll = binding.btnDeleteALL
+        btnDeleteAll.setOnClickListener {
+            deleteAll()
+        }
+
+        return binding.root
+    }
+
+    private fun deleteAll() {
+        val builder = AlertDialog.Builder(this.requireActivity())
+        val builder2 = AlertDialog.Builder(this.requireActivity())
+        builder.setMessage("Θελετε να διαγραψετε ολες τις Κατασχωρησεις στην Βαση Δεδομενων?")
+        builder.setCancelable(true)
+        builder.setPositiveButton("Ναι"){
+                dialog, _ ->
+            builder2.setMessage("Ειστε Σιγουρος-η οτι Θελετε να διαγραφουν ολα???")
+            builder2.setCancelable(true)
+            builder2.setPositiveButton("Ναι"){
+                    dialog, _ ->
+                sqLiteHelper.deleteAll()
+                getEntries()
+                dialog.dismiss()
+            }
+            builder2.setNegativeButton("Οχι"){
+                    dialog, _ -> dialog.dismiss()
+            }
+            val alert2 = builder2.create()
+            alert2.show()
+            dialog.dismiss()
+        }
+        builder.setNegativeButton("Οχι"){
+                dialog, _ -> dialog.dismiss()
+        }
+        val alert = builder.create()
+        alert.show()
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,8 +101,6 @@ class FragmentShow: Fragment(R.layout.fragment_show) {
         binding.recyclerviewID.layoutManager = LinearLayoutManager(requireActivity() as MainActivity)
         adapter = EntryAdapter()
         binding.recyclerviewID.adapter = adapter
-
-
 
     }
 

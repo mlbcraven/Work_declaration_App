@@ -1,6 +1,9 @@
 package com.example.spinnerrecycler
 
 import android.app.ActionBar
+import android.app.Activity
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +12,13 @@ import android.widget.Toast
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.spinnerrecycler.MainActivity.Companion.loginUser
 import com.example.spinnerrecycler.databinding.FragmentLoginBinding
 
 @Suppress("DEPRECATION")
 class LoginFragment:Fragment(R.layout.fragment_login) {
     private lateinit var binding: FragmentLoginBinding
-    private var loginUser = ""
+
 
 
     override fun onCreateView(
@@ -37,12 +41,13 @@ class LoginFragment:Fragment(R.layout.fragment_login) {
             if ((string == "pda2") && (int == 2)){
                 Toast.makeText(context,"Welcome Admin",Toast.LENGTH_SHORT).show()
                 loginUser = "Admin"
+                //(activity as AppCompatActivity).supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.BLACK))
 
 
             }
                 else if ((string == "pda3") && (int == 3 )) {
-                 Toast.makeText(context,"Welcome User 3", Toast.LENGTH_SHORT).show()
-                loginUser = "User3"
+                 Toast.makeText(context,"Welcome Ιωαννης Ελευθεριαδης", Toast.LENGTH_SHORT).show()
+                loginUser = "Ιωαννης Ελευθεριαδης"
 
 
             }
