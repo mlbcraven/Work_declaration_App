@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter.RFC_1123_DATE_TIME
 import java.util.*
 import java.util.logging.SimpleFormatter
-
+import kotlin.concurrent.thread
 
 
 class FragmentEntry:Fragment(R.layout.fragment_entry) {
@@ -103,6 +103,9 @@ class FragmentEntry:Fragment(R.layout.fragment_entry) {
         val entrybtn = binding.btnEntry
         entrybtn.setOnClickListener {
             addEntry()
+            thread {
+            onWork = false
+            }
         }
 
         sqLiteHelper = SQLiteHelper(requireActivity() as MainActivity)

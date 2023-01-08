@@ -50,6 +50,7 @@ class LoginFragment:Fragment(R.layout.fragment_login) {
                 loginUser = "Ιωαννης Ελευθεριαδης"
 
 
+
             }
                 else if ((string == "Guest") && (int == 1234)) {
                 Toast.makeText(context,"Welcome Guest", Toast.LENGTH_SHORT).show()

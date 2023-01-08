@@ -50,5 +50,7 @@ class MainActivity : AppCompatActivity() {
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentContainerView2,fragment)
         fragmentTransaction.commit()
+
+
     }
 }

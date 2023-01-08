@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import android.widget.CheckBox
 import androidx.core.database.getBlobOrNull
 import java.lang.Exception
@@ -85,7 +86,8 @@ class SQLiteHelper(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,nul
                 work = cursor.getString(cursor.getColumnIndex("work"))
                 timestamp = cursor.getString(cursor.getColumnIndex("timestamp"))
                 problems = cursor.getString(cursor.getColumnIndex("problems"))
-                chbStart = cursor.getString(cursor.getColumnIndex("chbStart")).toBoolean()
+                var rawValue = cursor.getString(cursor.getColumnIndex("chbStart"))
+                chbStart = if (rawValue == "1") true else false
 
                 val ent = Entry(id = id, name = name , work = work, timestamp = timestamp, problems = problems,chbStart = chbStart)
                 entryList.add(ent)
@@ -113,6 +115,9 @@ class SQLiteHelper(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,nul
         db.delete(TABLE_NAME,null,null)
         db.close()
     }
+
+    
+
 
     fun deleteEntryById(id: Int) : Int {
         val db = this.writableDatabase
